@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+        <h1>MENU </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nazwa</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for cat in category %}
+                <tr class="table-dark">
+                    <th scope="col">{{cat.category_name}}</th>
+                    <th scope="col">{{cat.category_price}}</th>
+                </tr>
+                {% for meal in menu %}
+                    {% if meal.meal_category.category_name == cat.category_name %}
+                      <tr>
+                        <td>{{meal.meal_id}}</td>
+                        <td>{{meal.meal_name}} <a  class="d-inline-flex justify-content-end btn btn-outline-danger " href="#" type="button"  ><img src="{% static 'icons/dash-square.svg' %}" alt="Delete"></a></td>
+                      </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
