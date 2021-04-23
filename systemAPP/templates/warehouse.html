@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex justify-content-center">
+      <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">ilość</th>
+                <th scope="col">Data Dostarczenia</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for cat in category %}
+                <tr class="table-dark">
+                    <th scope="col">{{cat.category_name}}</th>
+                    <th scope="col">{{cat.category_price}}</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                {% for meal in warehouse %}
+                    {% if meal.the_term_of_validity >= today %}
+                        {% if meal.meal_name.meal_category.category_name == cat.category_name %}
+                          <tr>
+                            <td>{{meal.meal_id}}</td>
+                            <td>{{meal.meal_name}} </td>
+                            <td>{{meal.quantity}} </td>
+                            <td>{{meal.delivery_date}} </td>
+                            <td> <a class="d-inline-flex justify-content-end btn btn-outline-danger " href="#" type="button"  >
+                                <img src="{% static 'icons/dash-square.svg' %}" alt="Delete"></a></td>
+                          </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+
+            </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

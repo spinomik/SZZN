@@ -3,8 +3,9 @@ from django.views import View
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.urls import reverse_lazy
 from django.views.generic import FormView, RedirectView
+from datetime import date
 from .forms import LoginUser
-from .models import Driver, Menu, MenuCategories
+from .models import Driver, Menu, MenuCategories, Warehouse
 
 user = get_user_model()
 class Index(View):
@@ -55,4 +56,24 @@ class MenuList(View):
                 'menu': menu
                 }
             return render(request, self.template_name, context)
+        else:
+            return render(request, "index.html")
 
+
+class WarehouseList(View):
+    template_name = "warehouse.html"
+    def get(self, request):
+        warehouse = Warehouse.objects.all().order_by("quantity")
+        today = date.today()
+
+        if warehouse:
+            category = MenuCategories.objects.all().order_by('category_name')
+            context = {
+                'today': today,
+                'category': category,
+                'warehouse': warehouse
+            }
+            print(today)
+            return render(request, self.template_name, context)
+        else:
+            return render(request, "index.html")
