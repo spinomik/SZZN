@@ -95,15 +95,15 @@ class DeliveryAdd(View):
     form_class = DeliveryForm
     def get(self, request):
         menu = Meal.objects.all().order_by('meal_name')
-        last_delivery_id = Warehouse.objects.latest('delivery_ID')
-        last_delivery_id = last_delivery_id.delivery_ID
         if menu:
+            # last_delivery_id = Warehouse.objects.latest('delivery_ID')
+            # last_delivery_id = last_delivery_id.delivery_ID
             category = MealCategories.objects.all().order_by('category_name')
             context = {
                 'today': today,
                 'category': category,
                 'menu': menu,
-                'last_delivery_id': last_delivery_id
+                # 'last_delivery_id': last_delivery_id
             }
             return render(request, self.template_name, context)
         else:
