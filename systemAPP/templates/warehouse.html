@@ -25,6 +25,7 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 {% for meal in warehouse %}
                     {% if meal.the_term_of_validity >= today %}
@@ -34,6 +35,11 @@
                             <td>{{meal.meal_name}} </td>
                             <td>{{meal.quantity}} </td>
                             <td>{{meal.delivery_date}} </td>
+                              {% if meal.delivery_ID.delivery_date == today %}
+                                  <td>świeże </td>
+                                  {%  else  %}
+                                  <td></td>
+                                  {% endif %}
                             <td> <a class="d-inline-flex justify-content-end btn btn-outline-danger " href="#" type="button"  >
                                 <img src="{% static 'icons/dash-square.svg' %}" alt="Delete"></a></td>
                           </tr>
@@ -41,7 +47,6 @@
                     {% endif %}
                 {% endfor %}
             {% endfor %}
-
             </tbody>
       </table>
     </div>

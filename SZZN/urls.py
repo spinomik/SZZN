@@ -24,5 +24,6 @@ urlpatterns = [
     path('index/logout/', v.UserLogout.as_view(), name='logout'),
     path('driver/list', v.DriverList.as_view(), name='driverlist'),
     path('menu', v.MenuList.as_view(), name='menu'),
-    path('warehouse/now', v.WarehouseList.as_view(), name="warehouseList")
+    path('warehouse/now', v.WarehouseList.as_view(), name="warehouseList"),
+    path('warehouse/delivery', v.DeliveryAdd.as_view(), name="delivery")
 ]

@@ -41,7 +41,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <li><a class="dropdown-item" href="{% url 'warehouseList' %}">Aktualne</a></li>
-            <li><a class="dropdown-item" href="#">Dostawa</a></li>
+            <li><a class="dropdown-item" href="{% url 'delivery' %}">Dostawa</a></li>
             <li><a class="dropdown-item" href="#">Odpady</a></li>
           </ul>
         </li>
@@ -60,6 +60,13 @@
     </div>
     {% endif %}
 </nav>
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-danger" role="Alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
   {% if user.is_authenticated %}
     <div class="d-flex justify-content-center bg-light bg-gradient vh-100">
       {% block content %}

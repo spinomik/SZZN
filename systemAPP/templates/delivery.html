@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="d-flex justify-content-center">
+        <h1>ZAMÓWIENIE </h1>
+    </div>
+  </div>
+  <form action="" method="POST">{% csrf_token %}
+    <div class="row">
+      <div class="col">
+          <label for="delivery_date" class="form-label">Data Dostawy</label>
+        <input type="date"  name="delivery_date" id="delivery_date" value="">
+      </div>
+      <div class="col">
+          <label for="delivery_ID" class="form-label">ID Dostawy</label>
+          <input type="text" name="delivery_ID" id="delivery_ID" value="{{last_delivery_id}}">
+      </div>
+      </div>
+    <div class="row">
+    <div class="d-flex justify-content-center">
+      <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Ilość</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for cat in category %}
+                <tr class="table-dark">
+                    <th scope="col">{{cat.category_name}}</th>
+                    <th scope="col"></th>
+                </tr>
+                {% for meal in menu %}
+                    {% if meal.meal_category.category_name == cat.category_name %}
+                      <tr>
+                        <td><input value="{{meal.meal_name}}" name="{{meal.meal_name}}"></td>
+                        <td><input type="number" name="{{meal.meal_name}}_quantity " id="quantity"> </td>
+                      </tr>
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+      </table>
+    </div>
+  </div>
+      <input type="submit" class="btn" name="submit" id="submit" value="Zamów">
+  </form>
+</div>
+
+{% endblock content %}
